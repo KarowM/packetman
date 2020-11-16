@@ -7,11 +7,13 @@ public class Packetman : MonoBehaviour {
 
     private Collider2D _collider;
     private Rigidbody2D _rigidBody;
+    private Animator _animator;
 
     void Start() {
         _dest = transform.position;
         _collider = GetComponent<Collider2D>();
         _rigidBody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     void Update() {
@@ -35,6 +37,10 @@ public class Packetman : MonoBehaviour {
             }
         }
         _rigidBody.MovePosition(Vector2.MoveTowards(transform.position, _dest, Speed));
+        
+        Vector2 dir = _dest - (Vector2)transform.position;
+        _animator.SetFloat("DirX", dir.x);
+        _animator.SetFloat("DirY", dir.y);
     }
 
     private bool canMove(Vector2 dir) {
