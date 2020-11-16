@@ -2,11 +2,14 @@
 using UnityEngine;
 
 public class Packetman : MonoBehaviour {
-    private float speed = 0.4f;
+    private float speed = 0.2f;
     private Vector2 dest;
+
+    private Collider2D collider;
 
     void Start() {
         dest = transform.position;
+        collider = GetComponent<Collider2D>();
     }
 
     void FixedUpdate() {
@@ -31,6 +34,10 @@ public class Packetman : MonoBehaviour {
     }
 
     private bool canMove(Vector2 dir) {
-        return true;
+        Vector2 pos = transform.position;
+        RaycastHit2D hit;
+        hit = Physics2D.Linecast(pos + dir, pos);
+        Debug.DrawLine(pos + dir, pos);
+        return (hit.collider == GetComponent<Collider2D>());
     }
 }
