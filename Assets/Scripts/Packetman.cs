@@ -46,6 +46,6 @@ public class Packetman : MonoBehaviour {
     private bool canMove(Vector2 dir) {
         Vector2 pos = transform.position;
         Collider2D otherCollider = Physics2D.Linecast(pos + dir, pos).collider;
-        return otherCollider == _collider || otherCollider.name.Equals("packet");
+        return otherCollider == _collider || otherCollider.name.StartsWith("packet");
     }
 }
