@@ -16,7 +16,7 @@ public class Packetman : MonoBehaviour {
         _animator = GetComponent<Animator>();
     }
 
-    void Update() {
+    void FixedUpdate() {
         float roundx = (float)Math.Round(transform.position.x, 1);
         float roundy = (float)Math.Round(transform.position.y, 1);
         transform.position = new Vector3(roundx, roundy, transform.position.z);
@@ -45,6 +45,7 @@ public class Packetman : MonoBehaviour {
 
     private bool canMove(Vector2 dir) {
         Vector2 pos = transform.position;
-        return Physics2D.Linecast(pos + dir, pos).collider == _collider;
+        Collider2D otherCollider = Physics2D.Linecast(pos + dir, pos).collider;
+        return otherCollider == _collider || otherCollider.name.Equals("packet");
     }
 }
