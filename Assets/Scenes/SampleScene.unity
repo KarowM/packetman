@@ -8781,7 +8781,6 @@ GameObject:
   - component: {fileID: 801136143}
   - component: {fileID: 801136147}
   - component: {fileID: 801136146}
-  - component: {fileID: 801136167}
   - component: {fileID: 801136166}
   - component: {fileID: 801136165}
   - component: {fileID: 801136164}
@@ -8833,6 +8832,7 @@ GameObject:
   - component: {fileID: 801136198}
   - component: {fileID: 801136197}
   - component: {fileID: 801136196}
+  - component: {fileID: 801136167}
   m_Layer: 0
   m_Name: maze
   m_TagString: Untagged
@@ -9490,7 +9490,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -4.5, y: 11.999999}
+  m_Offset: {x: -4.5, y: 12}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
