@@ -21,8 +21,7 @@ public class RedGhost : MonoBehaviour {
             Vector2 movement = Vector2.MoveTowards(transform.position, 
                                              _route[_curPoint],
                                                    speed);
-            _rigidBody.MovePosition(movement);
-            Debug.Log("Going towards: " + _route.Length);
+            _rigidBody.MovePosition(movement);;
         }
         else {
             _curPoint = (_curPoint + 1) % _route.Length;

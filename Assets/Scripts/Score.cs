@@ -7,14 +7,7 @@ public class Score : MonoBehaviour {
     public Text scoreText;
     public int score;
 
-    void Start() {
-    }
-
-    void Update() {
-        scoreText.text = _scorePrefix + score;
-    }
-
     public void incrementScore() {
-        score++;
+        scoreText.text = _scorePrefix + ++score;
     }
 }
