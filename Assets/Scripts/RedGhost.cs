@@ -34,7 +34,7 @@ public class RedGhost : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.name.Equals("packetman")) {
-            Destroy(other.gameObject);
+            FindObjectOfType<LifeManager>().PlayerDeath();
         }
     }
 
