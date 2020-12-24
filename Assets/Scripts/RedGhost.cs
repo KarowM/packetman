@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class RedGhost : MonoBehaviour {
     private Vector2[] _route;
     private int _curPoint = 0;
+    private bool isMoving;
     
     private Rigidbody2D _rigidBody;
     private Animator _animator;
@@ -12,29 +14,38 @@ public class RedGhost : MonoBehaviour {
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _route = CreateRoute();
+        isMoving = false;
+        StartCoroutine(StartMovement());
+    }
+
+    private IEnumerator StartMovement() {
+        yield return new WaitForSeconds(2);
+
+        isMoving = true;
     }
 
     private float speed = 0.2f;
 
     void FixedUpdate() {
-        if ((Vector2)transform.position != _route[_curPoint]) {
-            Vector2 movement = Vector2.MoveTowards(transform.position, 
-                                             _route[_curPoint],
-                                                   speed);
-            _rigidBody.MovePosition(movement);;
-        }
-        else {
-            _curPoint = (_curPoint + 1) % _route.Length;
-        }
+        if (isMoving) {
+            if ((Vector2)transform.position != _route[_curPoint]) {
+                Vector2 movement = Vector2.MoveTowards(transform.position,
+                                                 _route[_curPoint],
+                                                       speed);
+                _rigidBody.MovePosition(movement); ;
+            } else {
+                _curPoint = (_curPoint + 1) % _route.Length;
+            }
 
-        Vector2 dir = _route[_curPoint] - (Vector2)transform.position;
-        _animator.SetFloat("DirX", dir.x);
-        _animator.SetFloat("DirY", dir.y);
+            Vector2 dir = _route[_curPoint] - (Vector2)transform.position;
+            _animator.SetFloat("DirX", dir.x);
+            _animator.SetFloat("DirY", dir.y);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.name.Equals("packetman")) {
-            FindObjectOfType<LifeManager>().PlayerDeath();
+            FindObjectOfType<LifeManager>().PlayerDeath(other.gameObject);
         }
     }
 

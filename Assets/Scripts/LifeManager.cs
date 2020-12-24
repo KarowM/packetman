@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using System;
 
 public class LifeManager : MonoBehaviour {
 
+    [SerializeField] AudioClip deathClip;
     private GameObject[] lives;
     private int numLives;
 
@@ -23,12 +25,21 @@ public class LifeManager : MonoBehaviour {
         lives[1] = GameObject.Find("Life 2");
         lives[2] = GameObject.Find("Life 3");
     }
-    public void PlayerDeath() {
+    public void PlayerDeath(GameObject player) {
+        AudioSource.PlayClipAtPoint(deathClip, Camera.main.transform.position);
+        Destroy(player);
+        Destroy(lives[--numLives]);
+
+        StartCoroutine(LoadScene());
+    }
+
+    private IEnumerator LoadScene() {
+        yield return new WaitForSeconds(1.5f);
+
         if (numLives > 0) {
-            Destroy(lives[--numLives]);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         } else {
-            //TODO: go to fail screen
+            //TODO: go to fail scene
             Debug.Log("Out of Lives!!!");
         }
     }

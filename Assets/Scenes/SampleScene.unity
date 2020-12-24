@@ -1606,6 +1606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d600986ce9a89f04286c2a5afa6f7831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathClip: {fileID: 8300000, guid: e117096b151b4a04eba3bfe61023379a, type: 3}
 --- !u!1001 &156345832
 PrefabInstance:
   m_ObjectHideFlags: 0
